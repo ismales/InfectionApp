@@ -7,15 +7,15 @@
 
 import UIKit
 
-class SimulationViewController: UIViewController {
+final class SimulationViewController: UIViewController {
 
-    let groupSize: Int
-    let infectionRate: Int
-    let updateInterval: Double
+    private let groupSize: Int
+    private let infectionRate: Int
+    private let updateInterval: Double
 
-    var people: [Person] = []
-    var infectedCount = 0
-    var infectedTimer: Timer?
+    private var people: [Person] = []
+    private var infectedCount = 0
+    private var infectedTimer: Timer?
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -60,7 +60,6 @@ class SimulationViewController: UIViewController {
         configureView()
         setupSubViews()
         creatingObjects()
-        reloadCollectionView()
     }
 
     private func configureView() {
@@ -93,12 +92,6 @@ class SimulationViewController: UIViewController {
             people.append(person)
         }
     }
-
-    private func reloadCollectionView() {
-        Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { [weak self] _ in
-            self?.collectionView.reloadData()
-        }
-    }
 }
 
 extension SimulationViewController: UICollectionViewDelegateFlowLayout {
@@ -126,15 +119,49 @@ extension SimulationViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let person = people[indexPath.item]
-        guard person.healthy else { return }
-        person.healthy = false
-        infectedCount += 1
-        collectionView.reloadItems(at: [indexPath])
-        infectedLabel.text = "Зараженных: \(infectedCount)"
-        healthyLabel.text = "Здоровых: \(groupSize - infectedCount)"
+        while infectedCount < groupSize {
+            let person = people[indexPath.item]
+            guard person.healthy else { return }
+            person.healthy = false
+            infectedCount += 1
+            collectionView.reloadItems(at: [indexPath])
+            self.healthyLabel.text = "Здоровых: \(self.groupSize - self.infectedCount)"
+            self.infectedLabel.text = "Зараженных: \(self.infectedCount)"
 
-        // TODO: - написать алгоритм зарожения соседей
+            // TODO: - алгоритм зарожения соседей. заражает только соседей выбранной ячейки....
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                var infectedNeighbors = 0
+                var neighbors: [Person] = []
+                if indexPath.item > 0 {
+                    neighbors.append(self.people[indexPath.item - 1])
+                }
+                if indexPath.item % 10 < 9 {
+                    neighbors.append(self.people[indexPath.item + 1])
+                }
+                if indexPath.item > 9 {
+                    neighbors.append(self.people[indexPath.item - 10])
+                }
+                if indexPath.item < indexPath.last! - 10 {
+                    neighbors.append(self.people[indexPath.item + 10])
+                }
+                while infectedNeighbors < self.infectionRate && !neighbors.isEmpty {
+                    let randomIndex = Int.random(in: 0..<neighbors.count)
+                    let neighbor = neighbors[randomIndex]
+                    if neighbor.healthy {
+                        infectedNeighbors += 1
+                        self.infectedCount += 1
+                        DispatchQueue.main.asyncAfter(deadline: .now() + self.updateInterval) {
+                            neighbor.healthy = false
+                            self.healthyLabel.text = "Здоровых: \(self.groupSize - self.infectedCount)"
+                            self.infectedLabel.text = "Зараженных: \(self.infectedCount)"
+                            collectionView.reloadData()
+                        }
+                    }
+                    neighbors.remove(at: randomIndex)
+                }
+            }
+        }
     }
 }
 
