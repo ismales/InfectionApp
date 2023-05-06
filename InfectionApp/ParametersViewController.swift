@@ -12,13 +12,15 @@ final class ParametersViewController: UIViewController {
     private let groupSizeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Количество человек"
+        label.text = "Сколько всего человек в заражаемой группе"
+        label.numberOfLines = 0
         return label
     }()
 
     private lazy var groupSizeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "250"
         textField.underlined()
         textField.delegate = self
         return textField
@@ -27,13 +29,15 @@ final class ParametersViewController: UIViewController {
     private let infectionRateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Скорость распространения(человек):"
+        label.text = "Сколько человек может заразиться после контакта с зараженным"
+        label.numberOfLines = 0
         return label
     }()
 
     private lazy var infectionRateTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "2"
         textField.underlined()
         textField.delegate = self
         return textField
@@ -42,13 +46,14 @@ final class ParametersViewController: UIViewController {
     private let updateIntervalLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Время заражения(сек):"
+        label.text = "Как быстро зараженные заболеют (сек)"
         return label
     }()
 
     private lazy var updateIntervalTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "2"
         textField.underlined()
         textField.delegate = self
         return textField
@@ -79,7 +84,6 @@ final class ParametersViewController: UIViewController {
         view.backgroundColor = .white
         title = "Параметры"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Инфо", style: .plain, target: self, action: #selector(infoButtonTapped))
     }
 
     private func setupSubViews() {
@@ -130,11 +134,6 @@ final class ParametersViewController: UIViewController {
         ])
     }
 
-    @objc private func infoButtonTapped() {
-        let infoVC = UINavigationController(rootViewController: InfoViewController())
-        present(infoVC, animated: true)
-    }
-
     @objc private func startSimulationButtonTapped() {
         guard let groupSizeText = groupSizeTextField.text,
               let infectionRateText = infectionRateTextField.text,
@@ -150,20 +149,6 @@ final class ParametersViewController: UIViewController {
 
         let simulationViewController = SimulationViewController(groupSize: groupSize, infectionRate: infectionRate, updateInterval: updateInterval)
         navigationController?.pushViewController(simulationViewController, animated: true)
-    }
-}
-
-extension UITextField {
-
-    func underlined(){
-        self.placeholder = "Введите"
-        self.backgroundColor = .systemGray6
-        self.font = UIFont.systemFont(ofSize: 15)
-        self.layer.cornerRadius = 10
-        self.layer.borderColor = UIColor.gray.cgColor
-        self.layer.borderWidth = 1
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
-        self.leftViewMode = .always
     }
 }
 

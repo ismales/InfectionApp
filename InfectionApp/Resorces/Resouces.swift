@@ -9,7 +9,7 @@ import Foundation
 
 enum Resouces {
     enum Metric {
-        static let offset: CGFloat = 16
+        static let offset: CGFloat = 20
         static let height: CGFloat = 50
     }
 }

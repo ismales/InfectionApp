@@ -12,9 +12,9 @@
 		AD8168CF2A03DEA000341BB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD8168CD2A03DEA000341BB7 /* LaunchScreen.storyboard */; };
 		AD8168D72A03F33000341BB7 /* ParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8168D62A03F33000341BB7 /* ParametersViewController.swift */; };
 		AD8168D92A04E88000341BB7 /* SimulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8168D82A04E88000341BB7 /* SimulationViewController.swift */; };
-		AD8168DB2A04F50100341BB7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8168DA2A04F50100341BB7 /* InfoViewController.swift */; };
 		AD8168DD2A04FC9700341BB7 /* Resouces.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8168DC2A04FC9700341BB7 /* Resouces.swift */; };
 		AD8168DF2A05040A00341BB7 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8168DE2A05040A00341BB7 /* PersonCell.swift */; };
+		AD8168E82A06B1FC00341BB7 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8168E72A06B1FC00341BB7 /* UITextField+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,9 +25,9 @@
 		AD8168D02A03DEA000341BB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD8168D62A03F33000341BB7 /* ParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersViewController.swift; sourceTree = "<group>"; };
 		AD8168D82A04E88000341BB7 /* SimulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationViewController.swift; sourceTree = "<group>"; };
-		AD8168DA2A04F50100341BB7 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		AD8168DC2A04FC9700341BB7 /* Resouces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resouces.swift; sourceTree = "<group>"; };
 		AD8168DE2A05040A00341BB7 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		AD8168E72A06B1FC00341BB7 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,15 +62,39 @@
 			children = (
 				AD8168C22A03DE9D00341BB7 /* AppDelegate.swift */,
 				AD8168D62A03F33000341BB7 /* ParametersViewController.swift */,
-				AD8168DA2A04F50100341BB7 /* InfoViewController.swift */,
 				AD8168D82A04E88000341BB7 /* SimulationViewController.swift */,
-				AD8168DE2A05040A00341BB7 /* PersonCell.swift */,
+				AD8168EB2A06B34400341BB7 /* Model */,
+				AD8168E92A06B26100341BB7 /* Extensions */,
+				AD8168EA2A06B27F00341BB7 /* Resorces */,
+			);
+			path = InfectionApp;
+			sourceTree = "<group>";
+		};
+		AD8168E92A06B26100341BB7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD8168E72A06B1FC00341BB7 /* UITextField+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AD8168EA2A06B27F00341BB7 /* Resorces */ = {
+			isa = PBXGroup;
+			children = (
 				AD8168DC2A04FC9700341BB7 /* Resouces.swift */,
 				AD8168CB2A03DEA000341BB7 /* Assets.xcassets */,
 				AD8168CD2A03DEA000341BB7 /* LaunchScreen.storyboard */,
 				AD8168D02A03DEA000341BB7 /* Info.plist */,
 			);
-			path = InfectionApp;
+			path = Resorces;
+			sourceTree = "<group>";
+		};
+		AD8168EB2A06B34400341BB7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AD8168DE2A05040A00341BB7 /* PersonCell.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,8 +170,8 @@
 				AD8168DF2A05040A00341BB7 /* PersonCell.swift in Sources */,
 				AD8168DD2A04FC9700341BB7 /* Resouces.swift in Sources */,
 				AD8168D92A04E88000341BB7 /* SimulationViewController.swift in Sources */,
+				AD8168E82A06B1FC00341BB7 /* UITextField+.swift in Sources */,
 				AD8168D72A03F33000341BB7 /* ParametersViewController.swift in Sources */,
-				AD8168DB2A04F50100341BB7 /* InfoViewController.swift in Sources */,
 				AD8168C32A03DE9D00341BB7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +313,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D54BGPTYJ7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = InfectionApp/Info.plist;
+				INFOPLIST_FILE = InfectionApp/Resorces/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -320,7 +344,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D54BGPTYJ7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = InfectionApp/Info.plist;
+				INFOPLIST_FILE = InfectionApp/Resorces/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
